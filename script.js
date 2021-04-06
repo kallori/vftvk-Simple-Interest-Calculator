@@ -1,25 +1,37 @@
-function compute()
+function compute() 
 {
-    p = document.getElementById("principal").value;
     
+   var principal = document.getElementById("principal").value;
+   var rate = document.getElementById("rate").value;
+   var years = document.getElementById("years").value;
+
+   var interest = principal * years * rate / 100;
+   var current_year = new Date().getFullYear();
+   var future = current_year + parseInt(years);
+
+   document.getElementById('result').innerHTML = 
+   `If you deposit <span class="highlight">${principal}</span>, <br> 
+   at an interest rate of <span class="highlight">${rate}%</span>. <br>
+   You will receive an amount of <span class="highlight">${interest}</span>, <br>
+   in the year <span class="highlight">${future}</span>`
 }
-        // logic to get the actual year
 
-var dateobj = new Date();
+function sliderUpdate()
+{
+    var rate =  document.getElementById("rate").value;
+    document.getElementById('slider_value').innerHTML = `${rate}%`;
+}
 
-var B = dateobj.getFullYear();
+function validate()
+{
+const principal_input = document.getElementById("principal");
+var principal = principal_input.value;
+if (Number(principal) <= 0 || principal == ""){
+    alert("Enter a positive number");
+    principal_input.focus();
+    return false;
+}
 
-year = B+y;
-
-x=principal
-y=rate
-z=years
-interest=principal * years * rate / 100
-
-var y = document.getElementById("years");
-
-var today = new Date();
-
-    var currentYear = today.getFullYear();
-
-    futureYear = currentYear + y;
+compute();
+return false;
+}
